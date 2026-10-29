@@ -1,8 +1,8 @@
 # Week 6: Hand coding and automated coding of ReliefWeb reports
 
-MPA 2479, text analysis exercise, due Oct 29, 2026. Shwetha Mangalesh.
+Shwetha Mangalesh.
 
-This exercise is the first run of the screening and audit stages of the project's Analysis Plan (see the [project README](../README.md)). Twenty ReliefWeb reports on Ukraine from 2022 were coded by hand for one variable, then coded by a language model through the Claude API, and the two were compared. A topic model (LDA) was then fitted to all 3,458 English reports from 2022.
+This exercise is the first run of the screening and audit stages of the project's Analysis Plan. Twenty ReliefWeb reports on Ukraine from 2022 were coded by hand for one variable, then coded by a language model through the Claude API, and the two were compared. A topic model (LDA) was then fitted to all 3,458 English reports from 2022.
 
 ## Text source
 
