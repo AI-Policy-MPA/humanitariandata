@@ -1,0 +1,45 @@
+# Codebook: screening ReliefWeb reports for attacks on health care (v1)
+
+Stage 2 of the Analysis Plan (README). One variable, coded once per report.
+
+| Variable | Question | Codes |
+|---|---|---|
+| `attack_hc` | Does the report describe at least one specific attack on health care? | `yes` / `no` |
+
+If you are unsure, choose the code the rules point to and write the doubt in `note`.
+
+## Part A. What counts, from the SHCC codebook
+
+Source: Safeguarding Health in Conflict Coalition (SHCC) and Insecurity Insight, *Attacks Data Codebook*, version May 2019, p. 2, "Key definitions" and "Event criteria" (`project/2018-SHCC-Attacks-Data-Codebook-v-May-2019.pdf`). Read that page before coding. Below is a summary, not a quotation.
+
+**Attack on health care.** Verbal or physical violence, obstruction, or a threat of violence that interferes with the availability of, access to, or delivery of curative or preventive health services, in a country in conflict, carried out by an actor in the conflict.
+
+**What can be hit:**
+
+- **Health workers**: anyone, paid or volunteer, who provides health services or directly supports patients (doctors, nurses, paramedics, ambulance crews, hospital staff, government health officials, vaccination workers, medical education staff, and others).
+- **Health facilities**: anywhere that directly supports patients (hospitals, clinics, mobile clinics, makeshift hospitals, laboratories, pharmacies, medical warehouses, medical schools).
+- **The process of delivering care**: the SHCC data also count attacks on ambulances and other health transport, looting of medical supplies, armed entry into a facility, and military occupation of a facility (codebook columns M to R).
+
+**Included:** any such attack by state forces or a non-state armed group.
+
+**Excluded:** strikes and protests, and attacks by non-conflict actors such as criminals, patients or other civilians.
+
+## Part B. Rules for reports
+
+The SHCC codebook codes incidents, not reports, so it does not say when a report "describes" an attack. These rules fill that gap. They were proposed on 28 Oct 2026 and used unchanged for the Week 6 hand codes.
+
+| | Rule |
+|---|---|
+| B1 | **What you read.** The ReliefWeb page text only: title and body, as in the reading sheet. Do not open attachments or links. The model will see the same text. |
+| B2 | **Specific event.** `yes` needs at least one identifiable attack: the text names a place, a date, or a particular facility, worker or vehicle that was hit. A total alone ("N attacks on health care have been verified since February") is `no`. |
+| B3 | **Intent not needed.** A facility, worker, ambulance or patient hit by shelling or air strikes counts, whether or not it was the target. SHCC codes these as "indiscriminate" attacks, which are still attacks. |
+| B4 | **Perpetrator not needed.** An attack whose perpetrator is not named counts (SHCC's "NoInformation"), unless the text says or suggests a non-conflict actor (Part A, Excluded). |
+| B5 | **Any date.** An attack counts whenever it happened, including one recalled from earlier in the war. |
+| B6 | **Indirect harm is `no`.** Damage to power, water or roads that affects hospitals is `no`, unless a health facility, worker, vehicle, patient or medical supply was itself hit, blocked or seized. |
+| B7 | **Obstruction must be medical.** Blocked or attacked convoys, evacuations or corridors count only when the text says they carried patients, medical staff or medical supplies. |
+| B8 | **Statements.** A condemnation or appeal that refers to a specific attack is `yes` (B2 applies). A general call to protect health care is `no`. |
+
+## Version
+
+- v1, 2026-10-28: Part A summarised from the SHCC codebook; Part B proposed for the Week 6 exercise.
+- v1 frozen, 2026-10-28: Part B used unchanged for the 20 hand codes, and sent as written to the model (`week-06/R/03_code_llm.R`).
