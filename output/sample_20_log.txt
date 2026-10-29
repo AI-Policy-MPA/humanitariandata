@@ -1,0 +1,9 @@
+Drawn: 2026-10-28   seed: 20261028
+Input: ../project/data/raw/reliefweb/ukr_2022/reports.rds
+Ukraine reports dated 2022: 4122
+  English: 4066
+  English, 50 to 3000 words of page text: 3382
+  ...and mention health care (the pool): 1524
+      health term near a harm word: 520
+      health term only:             1004
+Sample: 10 from each part, 20 in all

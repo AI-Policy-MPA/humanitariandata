@@ -1,0 +1,86 @@
+Week 6 evaluation: 20 ReliefWeb reports, Ukraine 2022
+Question: does the report describe at least one specific attack on health care?
+Reference: hand codes (data/processed/hand_codes_20.xlsx)
+Model run: data/processed/llm_runs/sample20_20261028_222445.csv 
+Hand codes: 4 yes, 16 no
+
+==== model ====
+
+Confusion matrix (rows: hand codes; columns: model)
+     method
+hand  yes no
+  yes   1  3
+  no    0 16
+
+Accuracy   = correct / all = 17 / 20 = 0.85
+Baseline   = always "no" (the most common hand code) = 0.80
+Precision  = TP / (TP + FP) = 1 / (1 + 0) = 1.00   of the reports it called yes, the share coded yes by hand
+Recall     = TP / (TP + FN) = 1 / (1 + 3) = 0.25   of the reports coded yes by hand, the share it found
+F1         = 2 x P x R / (P + R) = 0.40
+(TP = both yes: 1; FP = it said yes, hand said no: 0; FN = hand said yes, it did not: 3; TN = both no: 16)
+
+==== keyword rule ====
+
+Confusion matrix (rows: hand codes; columns: keyword rule)
+     method
+hand  yes no
+  yes   2  2
+  no    8  8
+
+Accuracy   = correct / all = 10 / 20 = 0.50
+Baseline   = always "no" (the most common hand code) = 0.80
+Precision  = TP / (TP + FP) = 2 / (2 + 8) = 0.20   of the reports it called yes, the share coded yes by hand
+Recall     = TP / (TP + FN) = 2 / (2 + 2) = 0.50   of the reports coded yes by hand, the share it found
+F1         = 2 x P x R / (P + R) = 0.29
+(TP = both yes: 2; FP = it said yes, hand said no: 8; FN = hand said yes, it did not: 2; TN = both no: 8)
+
+==== Reports where the model and the hand codes disagree ====
+
+#5  ReliefWeb 3807560  (health_only)
+  Ukraine: Ongoing, active conflict a cause of a heavy humanitarian toll [EN/RU]
+  Hand: yes   yes, attack on humanitarian forces
+  Model: no   The statement mentions only general 'disrupted access to medical care' and a general call to spare civilians and infrastructure, with no identifiable attack on a health facility, worker, vehicle or supply, so B2, B6 and B8 make it 'no'.
+
+#7  ReliefWeb 3823664  (health_only)
+  Ukraine: Aged and those with disabilities face heightened risks, say UN experts
+  Hand: yes   in a way, I think this alludes to attacks on healthcare facilites which inturn exacerabates pre-existing health issues
+  Model: no   The report is a general appeal to protect older people and persons with disabilities, and it says only in general terms that explosive weapons are 'disrupting essential services like healthcare'; it names no specific facility, worker, vehicle or patient that was hit, so B2, B6 and B8 make it a no.
+
+#9  ReliefWeb 3839314  (health_near_harm)
+  The UN Reiterates the Call for an Easter Truce in Ukraine Amid a Growing Humanitarian Crisis and Mounting Displacement
+  Hand: yes   attacks on hospitals
+  Model: no   The report gives only a total ("Some 136 attacks on healthcare facilities were recorded since the start of the hostilities") and a general reference to "attacks on hospitals". It names no specific facility, place or date of an attack, so under B2 and B8 the code is no, and water and power outages are indirect harm under B6.
+
+==== By half of the sample ====
+
+# A tibble: 2 × 5
+  part             reports hand_yes model_yes model_agrees
+  <chr>              <int>    <int>     <int>        <int>
+1 health_near_harm      10        2         1            9
+2 health_only           10        2         0            8
+
+==== All 20 ====
+
+# A tibble: 20 × 7
+      id rw_id   part             hand  model keyword_rule title                                                                   
+   <int> <chr>   <chr>            <chr> <chr> <chr>        <chr>                                                                   
+ 1     1 3886547 health_near_harm no    no    yes          "Recent Ukrainian territorial gains reveal large-scale damage, IRC warn"
+ 2     2 3824053 health_near_harm yes   yes   yes          "Ukraine: \"We are calling for respect for human life\""                
+ 3     3 3834515 health_near_harm no    no    yes          "Ukraine Humanitarian Crisis: Singapore Red Cross Sends 3rd Tranche of "
+ 4     4 3854806 health_only      no    no    no           "World Bank Announces Additional $1.49 Billion Financing Support for Uk"
+ 5     5 3807560 health_only      yes   no    no           "Ukraine: Ongoing, active conflict a cause of a heavy humanitarian toll"
+ 6     6 3857184 health_only      no    no    no           "The United States announces additional humanitarian assistance to Ukra"
+ 7     7 3823664 health_only      yes   no    no           "Ukraine: Aged and those with disabilities face heightened risks, say U"
+ 8     8 3817292 health_only      no    no    no           "Joint UN mission visits humanitarian-development nexus projects in eas"
+ 9     9 3839314 health_near_harm yes   no    yes          "The UN Reiterates the Call for an Easter Truce in Ukraine Amid a Growi"
+10    10 3842716 health_near_harm no    no    yes          "UNICEF Ukraine Humanitarian Situation Report No. 10, 20-26 April 2022" 
+11    11 3847769 health_only      no    no    no           "Finn Church Aid opens Kyiv office, focusing on restarting education fo"
+12    12 3876205 health_only      no    no    no           "Operational Update: Supporting Mexico Rescue Efforts, Continued Relief"
+13    13 3827115 health_near_harm no    no    yes          "Ukraine: Humanitarian Impact Situation Report (As of 3:00 p.m. (EET) o"
+14    14 3840921 health_near_harm no    no    yes          "Urgently help Ukraine civilians flee Mariupol [EN/RU]"                 
+15    15 3838652 health_near_harm no    no    yes          "Highlights of the noon briefing by Stéphane Dujarric​, Spokesman for S" 
+16    16 3829616 health_only      no    no    no           "Blanket delivery offers some warmth for refugees waiting to cross Ukra"
+17    17 3836209 health_only      no    no    no           "Response to the Ukraine Crisis: Social Protection for Food Security an"
+18    18 3835604 health_only      no    no    no           "UNICEF and World Scouting join forces to support refugee children and "
+19    19 3849117 health_near_harm no    no    yes          "In the three months since the invasion of Ukraine, we have helped more"
+20    20 3861370 health_near_harm no    no    yes          "The situation of human rights in Ukraine in the context of the armed a"
